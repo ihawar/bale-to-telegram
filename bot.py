@@ -88,8 +88,8 @@ async def main():
     # tasks
     scheduler = AsyncIOScheduler()
     trigger = CronTrigger(
-        hour=22,
-        minute=3,
+        hour=5,
+        minute=0,
         timezone=ZoneInfo("Asia/Tehran")
     )
     scheduler.add_job(
