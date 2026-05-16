@@ -9,7 +9,11 @@ from aiogram.enums import ParseMode
 
 from db import run, BotInfo, User
 
-from middlewares import BotsMiddleware, UserMiddleware, AlbumMiddleware, AdminMiddleware
+from middlewares import (BotsMiddleware, 
+                         UserMiddleware, 
+                         AlbumMiddleware, 
+                         AdminMiddleware,
+                         JoinRequiredMiddleware)
 
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from apscheduler.triggers.cron import CronTrigger
@@ -68,6 +72,7 @@ async def main():
     # middlewares
     bale_dp.update.middleware(BotsMiddleware(bot_info, bale_bot, tg_bot))
     bale_dp.update.middleware(UserMiddleware())
+    bale_dp.update.middleware(JoinRequiredMiddleware())
 
     forwarder_router.message.middleware(AlbumMiddleware())
 
