@@ -84,7 +84,7 @@ async def handle_bot_manage_chats(cb: types.CallbackQuery,
             await cb.message.answer(t)
         
         builder.button(text=txt or chat.channel_username or chat.channel_id, 
-                       url=f"ble.ir/{chat.channel_username}" if chat.channel_username else "")
+                       url=chat.chat_link)
         builder.button(text="❌ حذف", callback_data=f"bot_delete_chat__{chat.id}")
 
     builder.button(text="➕ افزودن", callback_data=f"bot_add_chat")
@@ -167,7 +167,9 @@ async def handle_bot_required_chat_id(
             bot=bot_info,
             channel_id=str(chat.id),
             defaults={
+                'channel_name': chat.full_name,
                 'channel_username': chat.username,
+                'chat_link': chat.invite_link or f"ble.ir/{chat.username}"
             }
         )
 

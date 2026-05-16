@@ -43,7 +43,10 @@ class Channel(Model):
 
 class RequiredJoinChats(Model):
     id = fields.IntField(primary_key=True)
+    channel_name = fields.CharField(max_length=64)
     channel_id = fields.CharField(max_length=16)
     channel_username = fields.CharField(max_length=64, null=True)
+
+    chat_link = fields.CharField(max_length=128)
 
     bot = fields.ForeignKeyField('models.BotInfo', related_name='required_chats')
